@@ -3,6 +3,11 @@ interface MultiplyValues {
   value2: number;
 }
 
+export interface Exercise {
+  target: number;
+  exercise: number[];
+}
+
 const processArgv = (args: string[]): MultiplyValues => {
   if (args.length < 4) throw new Error("Not enough arguments");
   if (args.length > 4) throw new Error("Too many arguments");
@@ -17,4 +22,19 @@ const processArgv = (args: string[]): MultiplyValues => {
   }
 };
 
-export { processArgv };
+const processExerciseArgv = (args: Array<string>): Exercise => {
+  if (args.length <= 3) throw new Error("Not enough arguments");
+
+  const target = Number(args[2]);
+  const exercise = args.slice(3).map((n) => Number(n));
+  const isAllNumber = !exercise.includes(NaN);
+
+  if (!isAllNumber) throw new Error("Only number is allowed");
+
+  return {
+    target: target,
+    exercise: exercise,
+  };
+};
+
+export { processArgv, processExerciseArgv };
