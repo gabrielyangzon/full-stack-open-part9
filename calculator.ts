@@ -1,4 +1,4 @@
-import { processArgv } from "./util";
+import { processArgv } from "./utils/util";
 
 type Operation = "multiply" | "add" | "divide";
 

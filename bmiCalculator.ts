@@ -1,4 +1,4 @@
-import { processArgv } from "./util";
+import { processArgv } from "./utils/util";
 
 const calculateBmi = (height: number, weight: number) => {
   let heightInMeter = (height / 100) * (height / 100);
@@ -27,3 +27,5 @@ try {
   }
   console.log(errorMessage);
 }
+
+export { calculateBmi };

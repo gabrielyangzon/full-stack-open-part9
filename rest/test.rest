@@ -1,0 +1,9 @@
+GET http://localhost:3003/
+
+###
+GET http://localhost:3003/hello
+
+###
+GET http://localhost:3003/bmi?height=400&weight=3300
+
+

@@ -1,4 +1,4 @@
-import { Exercise, processExerciseArgv } from "./util";
+import { Exercise, processExerciseArgv } from "./utils/util";
 
 interface Result {
   periodLength: number;
