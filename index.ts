@@ -1,11 +1,16 @@
 import express from "express";
 const middleware = require("./utils/middlewares");
-import { calculateBmi } from "./bmiCalculator";
+import { calculateBmi } from "./calculations/bmiCalculator";
+import { calculator, Operation } from "./calculations/calculator";
+import { calculateExercise } from "./calculations/exerciseCalculator";
+import { Exercise } from "./utils/util";
 
 const app = express();
 
 app.use(express.json());
 app.use(middleware.requestLogger);
+app.use(middleware.errorHandler);
+////
 
 app.get("/", (_request, response) => {
   response.send("hello apps");
@@ -29,6 +34,31 @@ app.get("/bmi", (_request, response) => {
     height: height,
     bmi: result,
   });
+});
+
+app.post("/calculate", (_request, response) => {
+  const { value1, value2, op } = _request.body;
+
+  const operation = op as Operation;
+
+  console.log(operation);
+  const result = calculator(value1, value2, operation);
+  response.status(200).json({
+    result: result,
+  });
+});
+
+app.post("/exercises", (_request, response) => {
+  const { daily_exercises, target } = _request.body;
+
+  const exercise: Exercise = {
+    target: target,
+    exercise: daily_exercises,
+  };
+
+  const result = calculateExercise(exercise);
+
+  response.status(200).json({ result: result });
 });
 
 const PORT = 3003;

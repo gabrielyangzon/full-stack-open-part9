@@ -1,4 +1,4 @@
-import { processArgv } from "./utils/util";
+import { processArgv } from "../utils/util";
 
 const calculateBmi = (height: number, weight: number) => {
   let heightInMeter = (height / 100) * (height / 100);
@@ -14,18 +14,19 @@ const calculateBmi = (height: number, weight: number) => {
   else return resultMessage + "Obese 3";
 };
 
-try {
-  const { value1, value2 } = processArgv(process.argv);
+if (process.argv.length > 2) {
+  try {
+    const { value1, value2 } = processArgv(process.argv);
 
-  const result = calculateBmi(value1, value2);
+    const result = calculateBmi(value1, value2);
 
-  console.log(result);
-} catch (error: unknown) {
-  let errorMessage = "Something went wrong: ";
-  if (error instanceof Error) {
-    errorMessage += error.message;
+    console.log(result);
+  } catch (error: unknown) {
+    let errorMessage = "Something went wrong: ";
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
-
 export { calculateBmi };

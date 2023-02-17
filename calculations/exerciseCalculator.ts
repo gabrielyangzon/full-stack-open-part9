@@ -1,4 +1,4 @@
-import { Exercise, processExerciseArgv } from "./utils/util";
+import { Exercise, processExerciseArgv } from "../utils/util";
 
 interface Result {
   periodLength: number;
@@ -29,14 +29,17 @@ const calculateExercise = ({ target, exercise }: Exercise) => {
   } as Result;
 };
 
-try {
-  const result = calculateExercise(processExerciseArgv(process.argv));
+if (process.argv.length > 2) {
+  try {
+    const result = calculateExercise(processExerciseArgv(process.argv));
 
-  console.log(result);
-} catch (error: unknown) {
-  let errorMessage = "Something went wrong: ";
-  if (error instanceof Error) {
-    errorMessage += error.message;
+    console.log(result);
+  } catch (error: unknown) {
+    let errorMessage = "Something went wrong: ";
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
+export { calculateExercise };
